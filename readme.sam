@@ -1,0 +1,17 @@
+
+https://jenkins.io/doc/tutorials/build-a-java-app-with-maven
+   //code
+   https://github.com/jenkins-docs/simple-java-maven-app
+      git clone https://github.com/jenkins-docs/simple-java-maven-app.git
+      
+ //build     
+ mvn clean package
+ 
+ //run
+ ~/internet_code/jenkins/jenkins-tutorials/simple-java-maven-app/target$ java -jar my-app-1.0-SNAPSHOT.jar
+Hello World!
+
+mvn exec:java -Dexec.mainClass=com.mycompany.app.App
+
+   
+
