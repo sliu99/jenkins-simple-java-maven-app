@@ -110,8 +110,9 @@ Note: If you don’t see this, click New Item at the top left.
 
 8. In the Repository URL field, specify the directory path of your locally cloned repository above, which is from your user account/home directory on your host machine, mapped to the /home directory of the Jenkins container - i.e.
 
-For Linux - /home/sliu/internet_code/jenkins/jenkins-tutorials/simple-java-maven-app
-
+//For Linux - /home/sliu/internet_code/jenkins/jenkins-tutorials/simple-java-maven-app
+   https://github.com/jenkins-docs/jenkins-simple-java-maven-app.git
+    add credential  sliu/Bluebird1957
 9. Click Save to save your new Pipeline project. You’re now ready to begin creating your Jenkinsfile, which you’ll be checking into your locally cloned Git repository.
 
 
