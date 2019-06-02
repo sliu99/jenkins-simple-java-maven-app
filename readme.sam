@@ -9,9 +9,149 @@ https://jenkins.io/doc/tutorials/build-a-java-app-with-maven
  
  //run
  ~/internet_code/jenkins/jenkins-tutorials/simple-java-maven-app/target$ java -jar my-app-1.0-SNAPSHOT.jar
-Hello World!
+  Hello World!
 
+OR
 mvn exec:java -Dexec.mainClass=com.mycompany.app.App
+  Hello World!
+  
+================== 
+  
 
-   
+Run Jenkins in Docker
+In this tutorial, you’ll be running Jenkins as a Docker container from the jenkinsci/blueocean Docker image.
+
+docker run \
+  --rm \
+  -u root \
+  -p 8080:8080 \
+  -v jenkins-data:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v "$HOME":/home \
+  --name jenkins-tutorials \
+  jenkinsci/blueocean
+  
+  
+==========================  
+  
+  
+Accessing the Jenkins/Blue Ocean Docker container
+docker exec -it jenkins-tutorials bash
+
+
+======================
+
+
+Unlocking Jenkins
+1. http://localhost:8080 and wait until the Unlock Jenkins page appears.
+   cat /var/jenkins_home/secrets/initialAdminPassword
+   get password: 52e1e8f3afa843408cf6ae01d6690603
+2. From your terminal/command prompt window again, copy the automatically-generated alphanumeric password (between the 2 sets of asterisks).
+3. On the Unlock Jenkins page, paste this password into the Administrator password field and click Continue.
+
+==============================
+
+Customizing Jenkins with plugins
+After unlocking Jenkins, the Customize Jenkins page appears.
+On this page, click Install suggested plugins.
+
+=================================
+
+Creating the first administrator user
+Finally, Jenkins asks you to create your first administrator user.
+
+1. When the Create First Admin User page appears, specify your details in the respective fields and click Save and Finish.
+     sliu / Bluebird1957
+2. When the Jenkins is ready page appears, click Start using Jenkins.
+Notes:
+* This page may indicate Jenkins is almost ready! instead and if so, click Restart.
+* If the page doesn’t automatically refresh after a minute, use your web browser to refresh the page manually.
+
+3. If required, log in to Jenkins with the credentials of the user you just created and you’re ready to start using Jenkins
+
+===================================
+
+Stopping and restarting Jenkins
+Throughout the remainder of this tutorial, you can stop the Jenkins/Blue Ocean Docker container by typing Ctrl-C in the terminal/command prompt window from which you ran the docker run …​ command above.
+
+To restart the Jenkins/Blue Ocean Docker container:
+
+1. Run the same docker run …​ command you ran for macOS, Linux or Windows above.
+Note: This process also updates the jenkinsci/blueocean Docker image, if an updated one is available.
+
+2. Browse to http://localhost:8080.
+
+3. Wait until the log in page appears and log in.
+
+
+=========================================
+
+
+Fork and clone the sample repository on GitHub
+
+==========================================
+
+Create your Pipeline project in Jenkins
+
+1. Go back to Jenkins, log in again if necessary and click create new jobs under Welcome to Jenkins!
+Note: If you don’t see this, click New Item at the top left.
+
+2. In the Enter an item name field, specify the name for your new Pipeline project (e.g. simple-java-maven-app).
+
+3. Scroll down and click Pipeline, then click OK at the end of the page.
+
+4. ( Optional ) On the next page, specify a brief description for your Pipeline in the Description field (e.g. An entry-level Pipeline demonstrating how to use Jenkins to build a simple Java application with Maven.)
+
+5. Click the Pipeline tab at the top of the page to scroll down to the Pipeline section.
+
+6. From the Definition field, choose the Pipeline script from SCM option. This option instructs Jenkins to obtain your Pipeline from Source Control Management (SCM), which will be your locally cloned Git repository.
+
+7. From the SCM field, choose Git.
+
+8. In the Repository URL field, specify the directory path of your locally cloned repository above, which is from your user account/home directory on your host machine, mapped to the /home directory of the Jenkins container - i.e.
+
+For Linux - /home/sliu/internet_code/jenkins/jenkins-tutorials/simple-java-maven-app
+
+9. Click Save to save your new Pipeline project. You’re now ready to begin creating your Jenkinsfile, which you’ll be checking into your locally cloned Git repository.
+
+
+
+================================================
+
+Create your initial Pipeline as a Jenkinsfile
+
+pipeline {
+    agent {
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
+        }
+    }
+    stages {
+        stage('Build') { 
+            steps {
+                sh 'mvn -B -DskipTests clean package' 
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
