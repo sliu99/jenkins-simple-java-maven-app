@@ -150,6 +150,12 @@ git commit -m "Add initial Jenkinsfile"
 
 Add a test stage to your Pipeline
 
+Add a final deliver stage to your Pipeline
+mvn help:evaluate -Dexpression=project.name | grep "^[^\[]"
+   my-app
+mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"
+   1.0-SNAPSHOT
+
 
 
 
