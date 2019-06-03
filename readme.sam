@@ -111,7 +111,7 @@ Note: If you don’t see this, click New Item at the top left.
 8. In the Repository URL field, specify the directory path of your locally cloned repository above, which is from your user account/home directory on your host machine, mapped to the /home directory of the Jenkins container - i.e.
 
 //For Linux - /home/sliu/internet_code/jenkins/jenkins-tutorials/simple-java-maven-app
-   https://github.com/jenkins-docs/jenkins-simple-java-maven-app.git
+   https://github.com/sliu99/jenkins-simple-java-maven-app.git
     add credential  sliu/Bluebird1957
 9. Click Save to save your new Pipeline project. You’re now ready to begin creating your Jenkinsfile, which you’ll be checking into your locally cloned Git repository.
 
@@ -137,10 +137,18 @@ pipeline {
     }
 }
 
+3. Save your edited Jenkinsfile and commit it to your local simple-java-maven-app Git repository. E.g. Within the simple-java-maven-app directory, run the commands:
+git add .
+then
+git commit -m "Add initial Jenkinsfile"
 
+4. Go back to Jenkins again, log in again if necessary and click Open Blue Ocean on the left to access Jenkins’s Blue Ocean interface.
 
+5. In the This job has not been run message box, click Run, then quickly click the OPEN link which appears briefly at the lower-right to see Jenkins running your Pipeline project. If you weren’t able to click the OPEN link, click the row on the main Blue Ocean interface to access this feature.
 
+==============================================
 
+Add a test stage to your Pipeline
 
 
 
